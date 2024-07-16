@@ -8,13 +8,32 @@ void Main()
     Console.WriteLine("---------------------------");
     Console.WriteLine($"| Player: {playerScore} | Computer: {opponentScore} |");
     Console.WriteLine("---------------------------");
-    PlayerThrow();
+    string playerChoice = PlayerThrow();
     Console.WriteLine("VS");
-    OpponentThrow();
+    string opponentChoice = OpponentThrow();
+    ScoreCalc(playerChoice, opponentChoice);
 
 }
 
-void OpponentThrow()
+void ScoreCalc(string playerChoice, string opponentChoice)
+{
+    if (playerChoice == opponentChoice)
+    {
+        Console.WriteLine("Tie!");
+    };
+    
+    if (playerChoice == "1" && opponentChoice == "2" || playerChoice == "2" && opponentChoice == "3" || playerChoice == "3" && opponentChoice == "1")
+    {
+        Console.WriteLine("Opponent wins!");
+    };
+
+    if (playerChoice == "2" && opponentChoice == "1" || playerChoice == "3" && opponentChoice == "2" || playerChoice == "1" && opponentChoice == "3")
+    {
+        Console.WriteLine("Player wins!");
+    };
+};
+
+string OpponentThrow()
 {
     List<string> throws = new List<string>
     {
@@ -25,30 +44,32 @@ void OpponentThrow()
     
     Random r = new Random();
     int genRand = r.Next(throws.Count);
-    string throwResult = throws[genRand];
-    if (throwResult == "1")
+    string opponentChoice = throws[genRand];
+    if (opponentChoice == "1")
     {
         Rock();
     };
-    if (throwResult == "2")
+    if (opponentChoice == "2")
     {
         Paper();
     };
-    if (throwResult == "3")
+    if (opponentChoice == "3")
     {
         Scissors();
     };
+
+    return opponentChoice;
 }
 
-void PlayerThrow()
+string PlayerThrow()
 {
     Console.WriteLine("What would you like to throw?");
     Console.WriteLine("1) Rock");
     Console.WriteLine("2) Paper");
     Console.WriteLine("3) Scissors");
     Console.Write("\nMake a choice: ");
-    string answer = Console.ReadLine();
-    while (answer != "1" && answer != "2" && answer != "3" )
+    string playerChoice = Console.ReadLine();
+    while (playerChoice != "1" && playerChoice != "2" && playerChoice != "3" )
     {
         Console.WriteLine("\nInvalid input! Choose 1, 2, or 3 and try again.");
         Console.WriteLine("\nWhat would you like to throw?");
@@ -56,21 +77,23 @@ void PlayerThrow()
         Console.WriteLine("2) Paper");
         Console.WriteLine("3) Scissors");
         Console.Write("\nMake a choice: ");
-        answer = Console.ReadLine();
+        playerChoice = Console.ReadLine();
     }
 
-    if (answer == "1")
+    if (playerChoice == "1")
     {
         Rock();
     }
-    if (answer == "2")
+    if (playerChoice == "2")
     {
         Paper();
     }
-    if (answer == "3")
+    if (playerChoice == "3")
     {
         Scissors();
     }
+
+    return playerChoice;
 }
 
 void Rock()
