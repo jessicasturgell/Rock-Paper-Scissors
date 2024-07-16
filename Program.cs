@@ -4,32 +4,46 @@ void Main()
 {
     int playerScore = 0;
     int opponentScore = 0;
-    
+    while (playerScore < 3 && opponentScore < 3)
+    {
     Console.WriteLine("---------------------------");
-    Console.WriteLine($"| Player: {playerScore} | Computer: {opponentScore} |");
+    Console.WriteLine($"| Player: {playerScore} | Opponent: {opponentScore} |");
     Console.WriteLine("---------------------------");
     string playerChoice = PlayerThrow();
     Console.WriteLine("VS");
     string opponentChoice = OpponentThrow();
-    ScoreCalc(playerChoice, opponentChoice);
+    ScoreCalc(playerChoice, opponentChoice, ref playerScore, ref opponentScore);
+    }
+    if (playerScore == 3)
+    {
+        Console.WriteLine("-------------------------------------------------------------");
+        Console.WriteLine($"| Player wins the game! Player Score: {playerScore} | Opponent Score: {opponentScore} |");
+        Console.WriteLine("-------------------------------------------------------------");
+    } else
+    {
+        Console.WriteLine("---------------------------------------------------------------");
+        Console.WriteLine($"| Opponent wins the game! Player Score: {playerScore} | Opponent Score: {opponentScore} |");
+        Console.WriteLine("---------------------------------------------------------------");
+    }
+} 
 
-}
-
-void ScoreCalc(string playerChoice, string opponentChoice)
+void ScoreCalc(string playerChoice, string opponentChoice, ref int playerScore, ref int opponentScore)
 {
     if (playerChoice == opponentChoice)
     {
-        Console.WriteLine("Tie!");
+        Console.WriteLine("Tie!\n");
     };
     
-    if (playerChoice == "1" && opponentChoice == "2" || playerChoice == "2" && opponentChoice == "3" || playerChoice == "3" && opponentChoice == "1")
-    {
-        Console.WriteLine("Opponent wins!");
-    };
-
     if (playerChoice == "2" && opponentChoice == "1" || playerChoice == "3" && opponentChoice == "2" || playerChoice == "1" && opponentChoice == "3")
     {
-        Console.WriteLine("Player wins!");
+        Console.WriteLine("Player wins!\n");
+        playerScore++;
+    };
+
+    if (playerChoice == "1" && opponentChoice == "2" || playerChoice == "2" && opponentChoice == "3" || playerChoice == "3" && opponentChoice == "1")
+    {
+        Console.WriteLine("Opponent wins!\n");
+        opponentScore++;
     };
 };
 
